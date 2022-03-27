@@ -1,0 +1,30 @@
+{
+	"name": "swc-webpack-minifier",
+	"version": "0.0.1",
+	"description": "Minify wepback assets with SWC minifier",
+	"main": "lib/index.js",
+	"scripts": {
+		"build": "tsc"
+	},
+	"keywords": [
+		"swc",
+		"minify",
+		"terser",
+		"webpack",
+		"compilation",
+		"assets"
+	],
+	"author": "Henry Ansah",
+	"license": "MIT",
+	"devDependencies": {
+		"@types/node": "^17.0.23",
+		"@types/webpack": "^5.28.0",
+		"@types/webpack-sources": "^3.2.0",
+		"typescript": "^4.6.3",
+		"webpack": "^5.70.0"
+	},
+	"dependencies": {
+		"@swc/core": "^1.2.160",
+		"tapable": "^2.2.1"
+	}
+}

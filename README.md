@@ -1,0 +1,1 @@
+# swc-webpack-minifier
