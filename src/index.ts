@@ -71,14 +71,13 @@ export class SwcWebpackMinifier {
 				const output = await swc.minify(sourceString, transformOpts);
 				compilation.updateAsset(
 					asset.name,
-
 					sourceMap
 						? new SourceMapSource(
 								output.code,
 								asset.name,
 								output.map as any,
 								sourceString,
-								map.toString() || '',
+								(map && map.toString()) || '',
 								true
 						  )
 						: new RawSource(output.code),
