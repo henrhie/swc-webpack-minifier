@@ -1,5 +1,5 @@
 import webpack, { Compilation } from 'webpack';
-import swc from '@swc/core';
+import * as swc from '@swc/core';
 import { matchObject } from 'webpack/lib/ModuleFilenameHelpers.js';
 import { RawSource, SourceMapSource } from 'webpack-sources';
 
@@ -10,7 +10,6 @@ type Filter = string | RegExp;
 type MinifyOptions = swc.JsMinifyOptions & {
 	include?: Filter | Filter[];
 	exclude?: Filter | Filter[];
-	sourceMap?: boolean;
 };
 
 const isWp5 = (compilation: webpack.Compilation) => {
@@ -53,7 +52,7 @@ export class SwcWebpackMinifier {
 	}
 
 	private async processAssets(compilation: webpack.Compilation) {
-		const { include, exclude, sourceMap, ...transformOpts } = this.options;
+		const { include, exclude, ...transformOpts } = this.options;
 
 		const assets = compilation.getAssets().filter((asset) => {
 			return (
@@ -71,13 +70,13 @@ export class SwcWebpackMinifier {
 				const output = await swc.minify(sourceString, transformOpts);
 				compilation.updateAsset(
 					asset.name,
-					sourceMap
+					transformOpts.sourceMap
 						? new SourceMapSource(
 								output.code,
 								asset.name,
 								output.map as any,
 								sourceString,
-								(map && map.toString()) || '',
+								map as any,
 								true
 						  )
 						: new RawSource(output.code),

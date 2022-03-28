@@ -11,6 +11,11 @@ module.exports = {
 		filename: '[name].bundle.js',
 	},
 	optimization: {
-		minimizer: [new SwcWebpackMinifier()],
+		minimizer: [
+			new SwcWebpackMinifier({
+				sourceMap: true,
+			}),
+		],
 	},
+	devtool: 'source-map',
 };
